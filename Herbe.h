@@ -4,10 +4,11 @@
 #include "Entite.h"
 #include <memory>
 
+// Classe Herbe héritant de Entite
 class Herbe : public Entite {
 public:
-    Herbe(int x, int y);
-    void action(Univers& univers) override; 
+    Herbe(int x, int y); // Constructeur
+    void action(Univers& univers) override; // Méthode action
 };
 
-#endif // HERBE_H
+#endif
