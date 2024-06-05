@@ -1,14 +1,13 @@
-#ifndef ENTITE_H
-#define ENTITE_H
+#pragma once
 
-#include <memory>
+class Univers; // Déclaration avancée
 
-class Univers;
-
-class Entite : public std::enable_shared_from_this<Entite> {
+class Entite {
 public:
-    Entite(int x, int y, char symbole, int faimMax, int ageMax, int ageMaturite, int faim, int age);
+    Entite(int x, int y, char symbole, int faimMax, int ageMax, int ageMaturite, int faim = 0, int age = 0);
+    virtual ~Entite() = default;
 
+    virtual void action(Univers& univers) = 0;
     char getSymbole() const;
     bool estVivante() const;
     bool doitEtreRetiree() const;
@@ -20,23 +19,13 @@ public:
     bool peutSeReproduire() const;
     int getAge() const;
     int getFaim() const;
-
-    virtual void action(Univers& univers) = 0;
-    virtual void vieillirEtAugmenterFaim();
+    void vieillirEtAugmenterFaim();
 
 protected:
     int x, y;
     char symbole;
-    char sexe;
-    int faimMax;
-    int ageMax;
-    int ageMaturite;
-    int faim;
-    int age;
+    int faimMax, ageMax, ageMaturite;
+    int faim, age;
     bool vivant;
-    int toursDepuisReproduction;
-
-    void resetReproduction();
+    char sexe;
 };
-
-#endif // ENTITE_H

@@ -111,8 +111,8 @@ int main() {
             } while (!univers.estVide(x, y));
 
             char sexe = (rand() % 2 == 0) ? 'M' : 'F';
-            auto mouton = std::make_shared<Mouton>(x, y, sexe, 0, 5, 0, 50);
-            univers.ajouterEntite(std::static_pointer_cast<Entite>(mouton), x, y);
+            auto mouton = make_shared<Mouton>(x, y, sexe, 0, 5, 0, 50);
+            univers.ajouterEntite(static_pointer_cast<Entite>(mouton), x, y);
         }
 
         for (int i = 0; i < nombreLoups; ++i) {
@@ -123,8 +123,8 @@ int main() {
             } while (!univers.estVide(x, y));
 
             char sexe = (rand() % 2 == 0) ? 'M' : 'F';
-            auto loup = std::make_shared<Loup>(x, y, sexe, 0, 10, 0, 60);
-            univers.ajouterEntite(std::static_pointer_cast<Entite>(loup), x, y);
+            auto loup = make_shared<Loup>(x, y, sexe, 0, 10, 0, 60);
+            univers.ajouterEntite(static_pointer_cast<Entite>(loup), x, y);
         }
 
         for (int i = 0; i < nombreHerbe; ++i) {
@@ -134,16 +134,14 @@ int main() {
                 y = rand() % hauteur;
             } while (!univers.estVide(x, y));
 
-            auto herbe = std::make_shared<Herbe>(x, y);
-            univers.ajouterEntite(std::static_pointer_cast<Entite>(herbe), x, y);
+            auto herbe = make_shared<Herbe>(x, y);
+            univers.ajouterEntite(static_pointer_cast<Entite>(herbe), x, y);
         }
 
         int nombreTours = 200;
         vector<pair<int, int>> historique;
 
         simulation(nombreTours, univers, historique);
-
-        cout << "Tous les animaux sont morts. Fin de la simulation." << endl;
 
         while (true) {
             cout << "Voulez-vous sauvegarder votre parcours? (o/n): ";

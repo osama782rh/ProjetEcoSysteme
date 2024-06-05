@@ -1,19 +1,19 @@
-#ifndef ANIMAL_H
-#define ANIMAL_H
+#pragma once
 
 #include "Entite.h"
-#include <utility>
+#include <memory>
 
-class Animal : public Entite {
+// Déclaration avancée de la classe Univers
+class Univers;
+
+// Classe Animal héritant de Entite et utilisant enable_shared_from_this
+class Animal : public Entite, public std::enable_shared_from_this<Animal> {
 public:
     Animal(int x, int y, char symbole, int faimMax, int ageMax, int ageMaturite, int faim, int age);
-    void resetFaim(); // Ajout de la méthode resetFaim
+    virtual void action(Univers& univers) override = 0; // Méthode action virtuelle pure
 
 protected:
-    void deplacementAleatoire(Univers& univers);
-    std::pair<int, int> trouverNourritureProche(const Univers& univers, char symboleNourriture) const;
-    std::pair<int, int> isAdjacentToMate(const Univers& univers, char symbol) const;
-    void reproduire(Univers& univers, int mateX, int mateY);
+    std::pair<int, int> trouverNourritureProche(const Univers& univers, char symboleNourriture) const; // Trouver la nourriture la plus proche
+    void deplacementAleatoire(Univers& univers); // Déplacement aléatoire
+    void reproduire(Univers& univers, int mateX, int mateY); // Reproduction
 };
-
-#endif // ANIMAL_H

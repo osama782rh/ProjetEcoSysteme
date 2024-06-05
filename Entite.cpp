@@ -1,7 +1,7 @@
 #include "Entite.h"
 
 Entite::Entite(int x, int y, char symbole, int faimMax, int ageMax, int ageMaturite, int faim, int age)
-    : x(x), y(y), symbole(symbole), faimMax(faimMax), ageMax(ageMax), ageMaturite(ageMaturite), faim(faim), age(age), vivant(true), toursDepuisReproduction(0) {}
+    : x(x), y(y), symbole(symbole), faimMax(faimMax), ageMax(ageMax), ageMaturite(ageMaturite), faim(faim), age(age), vivant(true) {}
 
 char Entite::getSymbole() const {
     return symbole;
@@ -36,7 +36,7 @@ char Entite::getSexe() const {
 }
 
 bool Entite::peutSeReproduire() const {
-    return age >= ageMaturite && faim < faimMax / 2 && toursDepuisReproduction >= 3;
+    return age >= ageMaturite && faim < faimMax / 2;
 }
 
 int Entite::getAge() const { 
@@ -50,12 +50,7 @@ int Entite::getFaim() const {
 void Entite::vieillirEtAugmenterFaim() {
     age++;
     faim++;
-    toursDepuisReproduction++;
     if (faim > faimMax || age > ageMax) {
         vivant = false;
     }
-}
-
-void Entite::resetReproduction() {
-    toursDepuisReproduction = 0;
 }
